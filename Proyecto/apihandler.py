@@ -5,19 +5,19 @@ class APIHandler:
 
     @staticmethod
     def descargardatos():
-        url_profesores = APIHandler.url + "/profesores.json"
-        url_materias = APIHandler.url + "/materias.json"
+        urlprofesores = APIHandler.url + "/profesores.json"
+        urlmaterias = APIHandler.url + "/materias.json"
 
         try:
-            respuesta_profesores = requests.get(url_profesores)
-            respuesta_profesores.raise_for_status()
-            datos_profesores = respuesta_profesores.json()
+            resprofesores = requests.get(urlprofesores)
+            resprofesores.raise_for_status()
+            datosprofesores = resprofesores.json()
 
-            respuesta_materias = requests.get(url_materias)
-            respuesta_materias.raise_for_status()
-            datos_materias = respuesta_materias.json()
+            respmaterias = requests.get(urlmaterias)
+            respmaterias.raise_for_status()
+            datosmaterias = respmaterias.json()
 
-            return datos_profesores, datos_materias
+            return datosprofesores, datosmaterias
 
         except Exception as error:
             print("Hubo un problema al descargar los datos de GitHub:")
