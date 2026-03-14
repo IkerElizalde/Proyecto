@@ -62,7 +62,7 @@ class SistemaHorarios:
                 return p
         return None
     
-    def cargar_datos_desde_api(self):
+    def cargardatosapi(self):
         datos_profes, datos_materias = APIHandler.descargar_datos()
 
         if datos_profes is not None and datos_materias is not None:
