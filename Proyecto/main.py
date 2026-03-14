@@ -1,6 +1,6 @@
 from clasehorarios import SistemaHorarios
 
-def menuprincipal()
+def menuprincipal():
   print("-------------------------")
   print("Sistema de Horarios")
   print("-------------------------")
@@ -9,7 +9,7 @@ def menuprincipal()
   print("3. Cargar un horario en CSV")
   print("4. Salir del programa")
 
-def modulos()
+def modulos():
   print("-------------------------")
   print("Modulos")
   print("-------------------------")
