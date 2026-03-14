@@ -7,7 +7,7 @@ class Bloques:
         self.horainicio = horainicio
         self.horafin = horafin
         self.codigo = codigo
-        self.salones_ocupados = 0 
+        self.salonesocupados = 0 
 
     def __str__(self):
         return f"{self.dia} ({self.horainicio} - {self.horafin})"
@@ -26,7 +26,7 @@ class Seccion:
             return f"Materia: {self.codigo} | Profesor: {self.cedulaprof} | Horario: {str(self.horario)} | Salon: {self.salon}"
 
 class SistemaHorarios:
-    def __init__(self, limite_salones=30):
+    def __init__(self, limitesalones=30):
         self.profesores = [] 
         self.materias = []  
         self.secciones = []  
@@ -35,7 +35,7 @@ class SistemaHorarios:
         self.cargarbloques()
 
     def cargarbloques(self):
-        datos_bloques = [
+        datosbloques = [
             ("Lunes y Miercoles", "7:00", "8:30", "LM_07:00"),
             ("Lunes y Miercoles", "8:45", "10:15", "LM_08:45"),
             ("Lunes y Miercoles", "10:30", "12:00", "LM_10:30"),
@@ -52,9 +52,9 @@ class SistemaHorarios:
             ("Martes y Jueves", "5:30", "7:00", "MJ_17:30"),
         ]
         
-        for d, hi, hf, cod in datos_bloques:
-            nuevo_bloque = Bloques(d, hi, hf, cod)
-            self.bloquesdisp.append(nuevo_bloque)
+        for d, hi, hf, cod in datosbloques:
+            nuevobloque = Bloques(d, hi, hf, cod)
+            self.bloquesdisp.append(nuevobloque)
 
     def buscarprofesor(self, cedula):
         for p in self.profesores:
@@ -65,9 +65,9 @@ class SistemaHorarios:
     def cargardatosapi(self):
         datosprofes, datosmaterias = APIHandler.descargardatos()
 
-        if datosprofes is not None and datos_materias is not None:
+        if datosprofes is not None and datosmaterias is not None:
             for p in datosprofes:
-                nuevo_profe = Profesor(
+                nuevoprofe = Profesor(
                     p['nombre'], 
                     p['cedula'], 
                     p['correo'], 
@@ -76,7 +76,7 @@ class SistemaHorarios:
                 )
                 self.profesores.append(nuevoprofe)
 
-            for m in datos_materias:
+            for m in datosmaterias:
                 nuevamat = Materia(
                     m['codigo'], 
                     m['nombre'], 
@@ -84,7 +84,7 @@ class SistemaHorarios:
                 )
                 self.materias.append(nuevamat)
             
-            print(f"Se cargaron {len(self.profesores)} profesores y {len(self.materias)} materias.")
+            print(f"Se cargaron {len(self.profesores)} profesor/es y {len(self.materias)} materia/s.")
             return True
         else:
             print("Error: No se pudieron obtener los datos de la API.")

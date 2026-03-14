@@ -117,7 +117,7 @@ def menumaterias(sistema):
     option=validarentrada("Seleccione una opcion (1-5): ")
 
     if option==1:
-      print(\n---------Lista de Materias---------)
+      print("\n---------Lista de Materias---------")
       if not sistema.materias:
         print("No hay materias registradas")
       else:
@@ -125,7 +125,7 @@ def menumaterias(sistema):
           print(m)
     
     elif option==2:
-      print(\n---------Agregar Materias---------)
+      print("\n---------Agregar Materias---------")
       codigo=input("Ingrese el codigo de la materia: ")
       if sistema.buscarmateriascodigo(codigo) is not None:
         print("Ya existe una materia con este codigo")
@@ -136,7 +136,7 @@ def menumaterias(sistema):
         sistema.materias.append(nuevamateria)
 
     elif option==3:
-      print(\n---------Eliminar Materias---------)
+      print("---------Eliminar Materias---------")
       codigo=input("Ingrese el codigo de la materia: ")
       materiaobj=sistema.buscarmateriacodigo(codigo)
       if materiaobj is not None:
@@ -146,7 +146,7 @@ def menumaterias(sistema):
         print("No hay registro de esa materia")
     
     elif option==4:
-      print(\n---------Modificar Seccion de Materias---------)
+      print("\n---------Modificar Seccion de Materias---------")
       codigo=input("Ingrese el codigo de la materia: ")
       materiaobj=sistema.buscarmateriacodigo(codigo)
       if materiaobj is not None:
