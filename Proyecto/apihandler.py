@@ -4,7 +4,7 @@ class APIHandler:
     url="https://raw.githubusercontent.com/FernandoSapient/BPTSP05_2526-2/main"
 
     @staticmethod
-    def descargar_datos():
+    def descargardatos():
         url_profesores = APIHandler.url + "/profesores.json"
         url_materias = APIHandler.url + "/materias.json"
 
