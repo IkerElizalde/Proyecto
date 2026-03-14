@@ -27,9 +27,9 @@ class Profesor:
    
 
 class Materia:
-    def __init__(self, nombre, codigo, seccion=0):
-        self.nombre=nombre
+    def __init__(self, codigo, nombre, seccion=0):
         self.codigo=codigo
+        self.nombre=nombre
         self.seccion=seccion
     
     def modificar(self, nuevasec):
