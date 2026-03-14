@@ -30,9 +30,9 @@ class SistemaHorarios:
         self.profesores = [] 
         self.materias = []  
         self.secciones = []  
-        self.limite_salones = limite_salones
-        self.bloques_disponibles = []
-        self._cargar_bloques_maestros()
+        self.limitesalones = limitesalones
+        self.bloquesdisp = []
+        self.cargarbloques()
 
     def cargarbloques(self):
         datos_bloques = [
@@ -54,7 +54,7 @@ class SistemaHorarios:
         
         for d, hi, hf, cod in datos_bloques:
             nuevo_bloque = Bloques(d, hi, hf, cod)
-            self.bloques_disponibles.append(nuevo_bloque)
+            self.bloquesdisp.append(nuevo_bloque)
 
     def buscarprofesor(self, cedula):
         for p in self.profesores:
@@ -63,7 +63,7 @@ class SistemaHorarios:
         return None
     
     def cargardatosapi(self):
-        datosprofes, datosmaterias = APIHandler.descargar_datos()
+        datosprofes, datosmaterias = APIHandler.descargardatos()
 
         if datosprofes is not None and datos_materias is not None:
             for p in datosprofes:
