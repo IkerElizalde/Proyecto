@@ -29,6 +29,38 @@ def validarentrada(entrada):
     else:
       print("Entrada invalida")
 
+def menuprofesores(sistema):
+  while True:
+    print("-------------------------")
+    print("Modulo Profesores")
+    print("-------------------------")
+    print("1. Ver lista de profesores")
+    print("2. Agregar un profesor")
+    print("3. Eliminar un profesor")
+    print("4. Modificar materias de un profesor")
+    print("5. Volver a menu de modulos")
+    option=validarentrada("Seleccione una opcion (1-5)")
+    if option==1:
+      print("---------Lista de Profesores---------")
+      if not sistema.profesores:
+        print("No hay profesores registrados en el sistema")
+      else:
+        for p in sistema.profesores:
+          print(p)
+          print(f"Materias que dicta: {p.materias}")
+    
+    elif option==2:
+      print("---------Agregar Profesor---------")
+      ci=input("Ingrese la cedula del profesor: ")
+      if sistema.buscarprofesor(ci) is not None:
+        print("Ya existe un profesor con esta cedula")
+      else:
+        nombre=input("Ingrese el nombre del profesor: ")
+        correo=input("Ingrese el correo del profesor")
+        limit=validarentrada("Ingrese el limite de materias permitidas (numero): ")
+        nuevoprof=Profesor(nombre,cedula,correo,limite)
+
+
 def menumodulos(sistema):
   while True:
     modulos()
