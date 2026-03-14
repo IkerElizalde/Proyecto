@@ -10,13 +10,13 @@ class Profesor:
             self.materias = []
         self.secciones_asignadas = 0 
 
-    def agregar_materia(self, codigo):
+    def agregarmateria(self, codigo):
         if codigo not in self.materias:
             self.materias.append(codigo)
             return True
         return False
 
-    def eliminar_materia(self, codigo):
+    def eliminarmateria(self, codigo):
         if codigo in self.materias:
             self.materias.remove(codigo)
             return True
