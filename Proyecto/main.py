@@ -19,12 +19,13 @@ def modulos():
   print("4. Modificacion de Horarios")
   print("5. Volver al menu principal")
 
-def validarentrada(entrada)
+def validarentrada(entrada):
+  val=input(entrada)
   while True:
-    in=input(entrada)
-    if entrada.isdigit():
-      opcion=int(entrada)
-      return opcion
+    inp=input(entrada)
+    if val.isdigit():
+      option=int(val)
+      return option
     else:
       print("Entrada invalida")
 
