@@ -34,7 +34,7 @@ class SistemaHorarios:
         self.bloques_disponibles = []
         self._cargar_bloques_maestros()
 
-    def _cargar_bloques_maestros(self):
+    def cargarbloques(self):
         datos_bloques = [
             ("Lunes y Miercoles", "7:00", "8:30", "LM_07:00"),
             ("Lunes y Miercoles", "8:45", "10:15", "LM_08:45"),
@@ -56,17 +56,17 @@ class SistemaHorarios:
             nuevo_bloque = Bloques(d, hi, hf, cod)
             self.bloques_disponibles.append(nuevo_bloque)
 
-    def buscar_profesor_por_cedula(self, cedula):
+    def buscarprofesor(self, cedula):
         for p in self.profesores:
             if p.cedula == cedula:
                 return p
         return None
     
     def cargardatosapi(self):
-        datos_profes, datos_materias = APIHandler.descargar_datos()
+        datosprofes, datosmaterias = APIHandler.descargar_datos()
 
-        if datos_profes is not None and datos_materias is not None:
-            for p in datos_profes:
+        if datosprofes is not None and datos_materias is not None:
+            for p in datosprofes:
                 nuevo_profe = Profesor(
                     p['nombre'], 
                     p['cedula'], 
@@ -74,15 +74,15 @@ class SistemaHorarios:
                     p['materiasper'], 
                     p['materias']
                 )
-                self.profesores.append(nuevo_profe)
+                self.profesores.append(nuevoprofe)
 
             for m in datos_materias:
-                nueva_mat = Materia(
+                nuevamat = Materia(
                     m['codigo'], 
                     m['nombre'], 
                     m['secciones']
                 )
-                self.materias.append(nueva_mat)
+                self.materias.append(nuevamat)
             
             print(f"Se cargaron {len(self.profesores)} profesores y {len(self.materias)} materias.")
             return True
@@ -90,7 +90,7 @@ class SistemaHorarios:
             print("Error: No se pudieron obtener los datos de la API.")
             return False
         
-    def buscar_materia_por_codigo(self, codigo):
+    def buscarmateriacodigo(self, codigo):
         for m in self.materias:
             if m.codigo == codigo:
                 return m
