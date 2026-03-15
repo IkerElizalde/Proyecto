@@ -98,4 +98,52 @@ class SistemaHorarios:
                 return m
         return None
 
-   
+    def generarhorario(self, salonesdisp)
+        self.secciones=[]
+        for b in self.bloquesdisp:
+            b.salonesocupados=0
+        for p in self.profesores:
+            p.seccionesasignadas=0
+
+        seccionescreadas=0
+        seccionesfallidas=0
+
+        for materias in self.materias:
+            if int(materia.nrosecciones)==0:
+                continue
+            for numseccion in range(1,int(nrosecciones)+1):
+                asignar=False
+                for p in self.profesores:
+                    if materia.codigo in p.materias and p.seccionesasignadas<p.materiaspermitidas:
+                        for bloque in self.bloquesdisp:
+                            if bloque.salonesocupados<salonesdisponibles:
+                                libre=True
+                                for s in self.secciones:
+                                    if s.cedulaprof==p.cedula and s.horario.codigo==bloque.codigo:
+                                        libre=False
+                                        break
+                                if libre:
+                                    nuevasec=Seccion(materia.codigo, p.cedula, bloque, salon=bloque.salonesocupados+1)
+                                    self.secciones.append(nuevasec)
+                                    bloque.salonesocupados+=1
+                                    p.seccionesasignadas+=1
+                                    asignado=True
+                                    seccionescreadas+=1
+                                    break
+                            if asignado:
+                                break
+                        if not asignado:
+                            print(f"No se puede asignar {materia.nombre} (Seccion {numseccion})")
+                            seccionesfallidas+=1
+
+        print(f"Secciones creadas: {seccionescreadas}")
+        if seccionesfallidas>0:
+            print(f"Secciones fallidas: {seccionesfallidas}")
+            
+                            
+                
+
+
+    
+
+
