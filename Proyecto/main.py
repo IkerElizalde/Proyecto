@@ -284,7 +284,16 @@ def menumodulos(sistema):
         print("Error. Número sin sentido")
         continue
 
-      print("Generando horario")
+      sistema.generarhorario(salonesdisp)
+      if sistema.secciones:
+        ver=input("Desea ver el horario generado? (si/no): ").lower()
+        if ver=="si":
+          print("\n---------Horario---------")
+          for s in sistema.secciones:
+            m=sistema.buscarmateriacodigo(s.codigo)
+            p=sistema.buscarprofesor(s.cedulaprof)
+            print(f"{s.horario} - {m.nombre} | Profesor: {p.nombre} | Salon: {s.salon}")
+          
 
       #aqui debe ir la funcion principal
 
