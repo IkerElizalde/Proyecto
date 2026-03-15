@@ -197,7 +197,6 @@ def menumaterias(sistema):
         nuevamateria=Materia(codigo,nombre,secciones)
         sistema.materias.append(nuevamateria)
 
-
     elif option==4:
       print("---------Eliminar Materias---------")
       codigo=input("Ingrese el codigo de la materia: ")
