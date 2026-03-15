@@ -56,11 +56,6 @@ class SistemaHorarios:
             nuevobloque = Bloques(d, hi, hf, cod)
             self.bloquesdisp.append(nuevobloque)
 
-    def buscarprofesor(self, cedula):
-        for p in self.profesores:
-            if p.cedula == cedula:
-                return p
-        return None
     
     def cargardatosapi(self):
         datosprofes, datosmaterias = APIHandler.descargardatos()
@@ -90,6 +85,13 @@ class SistemaHorarios:
             print("Error: No se pudieron obtener los datos de la API.")
             return False
         
+
+    def buscarprofesor(self, cedula):
+        for p in self.profesores:
+            if p.cedula == cedula:
+                return p
+        return None
+    
     def buscarmateriacodigo(self, codigo):
         for m in self.materias:
             if m.codigo == codigo:

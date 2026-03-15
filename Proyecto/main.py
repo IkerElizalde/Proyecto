@@ -1,17 +1,26 @@
 from clasehorarios import SistemaHorarios
+from clasesprofmat import Profesor,Materia
 
 def menuprincipal():
   print("-------------------------")
-  print("Sistema de Horarios")
+  print("---Sistema de Horarios---")
   print("-------------------------")
   print("1. Crear listas en blanco")
   print("2. Descargar los datos de la API en Github")
   print("3. Cargar un horario en CSV")
   print("4. Salir del programa")
 
+def validarentrada(entrada):
+  while True:
+    val=input(entrada)
+    if val.isdigit():
+      return int(val)
+    else:
+      print("Entrada invalida. Por favor, ingrese un numero.")
+
 def modulos():
   print("-------------------------")
-  print("Modulos")
+  print("---------Modulos---------")
   print("-------------------------")
   print("1. Modulo de Profesores")
   print("2. Modulo de Materias")
@@ -19,27 +28,20 @@ def modulos():
   print("4. Modificacion de Horarios")
   print("5. Volver al menu principal")
 
-def validarentrada(entrada):
-  val=input(entrada)
-  while True:
-    inp=input(entrada)
-    if val.isdigit():
-      option=int(val)
-      return option
-    else:
-      print("Entrada invalida")
+
 
 def menuprofesores(sistema):
   while True:
     print("-------------------------")
-    print("Modulo Profesores")
+    print("----Modulo Profesores----")
     print("-------------------------")
     print("1. Ver lista de profesores")
-    print("2. Agregar un profesor")
-    print("3. Eliminar un profesor")
-    print("4. Modificar materias de un profesor")
-    print("5. Volver a menu de modulos")
-    option=validarentrada("Seleccione una opcion (1-5)")
+    print("2. Ver un profesor en especifico")
+    print("3. Agregar un profesor")
+    print("4. Eliminar un profesor")
+    print("5. Modificar materias de un profesor")
+    print("6. Volver a menu de modulos")
+    option=validarentrada("Seleccione una opcion (1-6)")
     if option==1:
       print("\n---------Lista de Profesores---------")
       if not sistema.profesores:
@@ -49,20 +51,35 @@ def menuprofesores(sistema):
           print(p)
           print(f"Materias que dicta: {p.materias}")
     
-    elif option==2:
+    elif option == 2:
+      print("\n-----Profesor en especifico-----")  
+      ci=input("Ingrese la cédula a buscar: ")
+      profe = sistema.buscarprofesor(ci)
+      if profe is not None:
+        print("\n---Detalles del profesor---")
+        print(f"Nombre: {profe.nombre}")
+        print(f"Cedula: {profe.cedula}")
+        print(f"Correo: {profe.correo}")
+        print(f"Limite de materias: {profe.materiaspermitidas}")
+        print(f"Materias asignadas: {profe.materias}")
+
+      else: 
+        print("No se encontró ningún profesor con esa cedula registrada")
+
+    elif option==3:
       print("\n---------Agregar Profesor---------")
       ci=input("Ingrese la cedula del profesor: ")
       if sistema.buscarprofesor(ci) is not None:
         print("Ya existe un profesor con esta cedula")
       else:
         nombre=input("Ingrese el nombre del profesor: ")
-        correo=input("Ingrese el correo del profesor")
-        limit=validarentrada("Ingrese el limite de materias permitidas (numero): ")
-        nuevoprof=Profesor(nombre,cedula,correo,limite)
-        sistema.profesores.append(nuevoprof)
-        print(f"El profesor, {nombre}, ha sido agregado")
+        correo=input("Ingrese el correo del profesor: ")
+        limite=validarentrada("Ingrese el limite de materias permitidas (numero): ")
+        nuevoprofesor=Profesor(nombre,ci,correo,limite)
+        sistema.profesores.append(nuevoprofesor)
+        print(f"El profesor, {nombre}, ha sido agregado satisfactoriamente")
     
-    elif option==3:
+    elif option==4:
       print("\n---------Eliminar Profesor---------")
       ci=input("Ingrese la cedula del profesor: ")
       profe=sistema.buscarprofesor(ci)
@@ -72,7 +89,7 @@ def menuprofesores(sistema):
       else:
         print("No hay profesor con esta cedula registrada")
 
-    elif option==4:
+    elif option==5:
       print("\n---------Modificar Materias de Profesor---------")
       ci=input("Ingrese la cedula del profesor: ")
       profe=sistema.buscarprofesor(ci)
@@ -83,26 +100,26 @@ def menuprofesores(sistema):
         if next==1:
           codigo=input("Ingrese el codigo de la materia a agregar: ")
           if profe.agregarmateria(codigo):
-            print("Materia agregada")
+            print("Materia agregada satisfactoriamente")
           else:
             print("El profesor ya tiene esta materia asignada")
         elif next==2:
           codigo=input("Ingrese el codigo de la materia a eliminar: ")
           if profe.eliminarmateria(codigo):
-            print("Materia eliminada")
+            print("Materia eliminada satisfactoriamente")
           else:
             print("El profesor no tenia esta materia asignada")
         else:
           print("Opcion invalida")
       else:
-        print("No se hay registro de la cedula ingresada")
+        print("No hay registro de la cedula ingresada")
     
-    elif option==5:
+    elif option==6:
       print("Regresando al menu de modulos")
       break
     
     else:
-      print("Entrada invalida, se debe ingresar un numero del 1 al 5")
+      print("Entrada invalida, se debe ingresar un numero del 1 al 6")
 
 def menumaterias(sistema):
   while True:
@@ -110,11 +127,12 @@ def menumaterias(sistema):
     print("Modulo Materias")
     print("-------------------------")
     print("1. Ver lista de materias")
-    print("2. Agregar una materia")
-    print("3. Eliminar una materia")
-    print("4. Modificar cantidad de secciones")
-    print("5. Volver al menu de modulos")
-    option=validarentrada("Seleccione una opcion (1-5): ")
+    print("2. Ver detalles de una materia específica")
+    print("3. Agregar una materia")
+    print("4. Eliminar una materia")
+    print("5. Modificar cantidad de secciones")
+    print("6. Volver al menu de modulos")
+    option=validarentrada("Seleccione una opcion (1-6): ")
 
     if option==1:
       print("\n---------Lista de Materias---------")
@@ -123,11 +141,32 @@ def menumaterias(sistema):
       else:
         for m in sistema.materias:
           print(m)
+    elif option == 2:
+      print("\n-----Materia especifica-----")  
+      codigo=input("Ingrese el código de la materia a buscar: ")
+      mater = sistema.buscarmateriacodigo(codigo)
+      if mater is not None:
+        print("\n---Detalles de la materia---")
+        print(f"Código: {mater.codigo}")
+        print(f"Nombre: {mater.nombre}")
+        print(f"Secciones requeridas: {mater.nrosecciones}")
+
+        profescapacitados = []
+        for p in sistema.profesores:
+          if mater.codigo in p.materias:
+            profescapacitados.append(p.nombre)
+          
+          if profescapacitados:
+            print(f"A continuación, los profesores capacitados: {profescapacitados}")
+          else:
+            print("No hay profesores capacitados asignados aquí")
+      else:
+        print("No se encontró ninguna materia con ese código")
     
-    elif option==2:
+    elif option==3:
       print("\n---------Agregar Materias---------")
       codigo=input("Ingrese el codigo de la materia: ")
-      if sistema.buscarmateriascodigo(codigo) is not None:
+      if sistema.buscarmateriacodigo(codigo) is not None:
         print("Ya existe una materia con este codigo")
       else:
         nombre=input("Ingresar nombre de la materia: ")
@@ -135,7 +174,7 @@ def menumaterias(sistema):
         nuevamateria=Materia(codigo,nombre,secciones)
         sistema.materias.append(nuevamateria)
 
-    elif option==3:
+    elif option==4:
       print("---------Eliminar Materias---------")
       codigo=input("Ingrese el codigo de la materia: ")
       materiaobj=sistema.buscarmateriacodigo(codigo)
@@ -145,7 +184,7 @@ def menumaterias(sistema):
       else:
         print("No hay registro de esa materia")
     
-    elif option==4:
+    elif option==5:
       print("\n---------Modificar Seccion de Materias---------")
       codigo=input("Ingrese el codigo de la materia: ")
       materiaobj=sistema.buscarmateriacodigo(codigo)
@@ -158,18 +197,18 @@ def menumaterias(sistema):
       else:
         print("No se encuentra alguna materia con ese codigo")
     
-    elif option==5:
+    elif option==6:
       print("Volviendo al menu de modulos")
       break
     
     else:
-      print("Entrada debe ser un numero del 1 al 5")
+      print("Entrada debe ser un numero del 1 al 6")
 
 
 def menumodulos(sistema):
   while True:
     modulos()
-    option=validarentrada("Seleccione un modulo (1-5)")
+    option=validarentrada("Seleccione un modulo (1-5): ")
     if option==1:
       menuprofesores(sistema)
     elif option==2:
@@ -184,11 +223,13 @@ def menumodulos(sistema):
     else:
       print("Entrada invalida")
 
+#---------------------------------------------------------------------------------------------->
+
 def main():
   sistema=SistemaHorarios()
   while True:
     menuprincipal()
-    option=validarentrada("Seleccione una opcion (1-4)")
+    option=validarentrada("Seleccione una opcion (1-4): ")
     if option==1:
       print("Lista en Blanco")
       sistema.profesores=[]
@@ -203,11 +244,11 @@ def main():
 
     elif option==3:
       print("CSV")
-
+#se debe pasar a generar el horario
     elif option==4:
       print("Saliendo")
       break
-    
+  #para salir
     else:
       print("Entrada invalida")
 

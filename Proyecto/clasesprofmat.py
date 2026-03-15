@@ -3,7 +3,8 @@ class Profesor:
         self.nombre = nombre
         self.cedula = cedula
         self.correo = correo
-        self.materias_permitidas = materiaspermitidas
+        self.materiaspermitidas = materiaspermitidas
+
         if materias is not None:
             self.materias = materias
         else:
@@ -23,18 +24,17 @@ class Profesor:
         return False
 
     def __str__(self):
-        return f"Prof: {self.nombre} | CI: {self.cedula} | Límite: {self.materias_permitidas}"
-   
+        return f"Prof: {self.nombre} | CI: {self.cedula} | Límite: {self.materiaspermitidas}"
 
 class Materia:
-    def __init__(self, codigo, nombre, seccion=0):
+    def __init__(self, codigo, nombre, nrosecciones=0):
         self.codigo=codigo
         self.nombre=nombre
-        self.seccion=seccion
+        self.nrosecciones=nrosecciones
     
-    def modificar(self, nuevasec):
-        self.seccion=nuevasec
+    def modificar(self, nuevo_nrosec):
+        self.nrosecciones=nuevo_nrosec
 
     def __str__(self):
-        return f"Materia: {self.nombre} ({self.codigo}) | Secciones necesarias: {self.seccion}"
+        return f"Materia: {self.nombre} ({self.codigo}) | Secciones necesarias: {self.nrosecciones}"
     
