@@ -304,6 +304,86 @@ def menumodulos(sistema):
       break     
     else:
       print("Entrada invalida")
+#---------------------------------------------------------------------------------------------->
+
+def modificarhorarios(sistema):
+  if not sistema.secciones:
+    print("\nError: Aún no se han generado horarios. Ve a la opción 3 primero.")
+    return
+
+    print("\n--- 1. Seleccionar Materia.---")
+  
+  codinsecs = []
+  for s in sistema.secciones:
+    if s.codigo not in codinsecs:
+        codinsecs.append(s.codigo)
+
+  for i in range(len(codinsecs)):
+    cod = condinsecs[i]
+    mat = sistema.buscarmateriacodigo(cod)
+    print(f"{i+1}. {mat.nombre} ({cod}")
+
+  funmat = validarentrada("Seleccione el número de la materia: ")
+  if funmat < 1 or funmat > len(codinsecs):
+    print("Opción inválida.")
+    return
+
+  selectcode = codinsecs[funmat-1]
+  objmateria = sistema.buscarmateriacodigo(selectcode)
+
+  print(f"\n--- 2. Seleccionar Sección de {objmateria.nombre} ---")
+
+  materiaseccs = []
+  for s in sistema.secciones:
+    if s.codgio = selectcode:
+      materiaseccs.append(s)
+
+  for i in range(len(materiaseccs)):
+    sec = materiaseccs[i]
+    prof = sistema.buscarprofesor(sec.cedulaprof)
+    print(f"{i+1}. Horario: {sec.horario} | Profesor: {prof.nombre} | Salón {sec.salon}")
+
+  funsecc = validarentrada("Seleccione el número de la sección a modificar: ")
+  if funsec < 1 or funsec > len(materiaseccs)
+    print("Opción inválida.")
+    return
+
+  secselect = materiaseccs[funsec-1]
+  profactual = sistema.buscarprofesor(secseled.cedulaprof)
+  bloqueactual = secselect.horario
+
+  print("\n--- 3. Opciones de modificación ---")
+  print("1. Cambiar el profesor de esta sección")
+  print("2. Cambiar el horario de esta sección")
+  funmod = validarentrada("Seleccione una opción (1 o 2): ")
+
+  if funmod == 1:
+    print (f"\nProfesores disponibles para clases {objmateria.nombre} en el horario {bloqueactual.codigo}:")
+    profesoresdisp = []
+
+
+    for p in sistema.profesores:
+      if codeselect in p.materias and p.cedula != profactual. cedula:
+          if p.seccionesasignadas < p.materiaspermitidas:
+
+            ocupado = False
+            for s in sistema.secciones:
+              if s.cedulaprof == p.cedula and s.horario.codigo == bloqueactual.codigo_
+                ocupado = True
+                break
+            if ocupado == False:
+              profesoresdisp.append(p)
+
+  if len(profesoresdisp) == 0:
+    print("No hay profesores disponibles para este horario")
+  else:
+      for i in range(len(profesoresdisp)):
+        pdisp = profesoresdisp[i]
+        print(f"{i+1}. {pdisp.nombre} (CI: {pdisp.cedula})")
+
+    funprof = validarentrada("Seleccione el número del nuevo profesor: ")
+    if funprof >= 1 and funprof <= len (profdisp):
+
 
 #---------------------------------------------------------------------------------------------->
 
