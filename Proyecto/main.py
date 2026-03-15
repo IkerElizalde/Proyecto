@@ -382,7 +382,9 @@ def modificarhorarios(sistema):
         print(f"{i+1}. {pdisp.nombre} (CI: {pdisp.cedula})")
 
     funprof = validarentrada("Seleccione el número del nuevo profesor: ")
-    if funprof >= 1 and funprof <= len (profdisp):
+    if funprof >= 1 and funprof <= len (profesoresdisp):
+      nuevoprof = profesoresdisp[funprof-1]
+      
 
 
 #---------------------------------------------------------------------------------------------->
