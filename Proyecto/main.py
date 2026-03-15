@@ -233,14 +233,25 @@ def menumaterias(sistema):
       print("\n---------Modificar Seccion de Materias---------")
       codigo=input("Ingrese el codigo de la materia: ")
       materiaobj=sistema.buscarmateriacodigo(codigo)
+
       if materiaobj is not None:
-        print(f"Materia seleccionada: {materiaobj.nombre} ({materiaobj.codigo})")
-        print(f"Secciones actuales: {materiaobj.seccion}")
+        print(f"Materia seleccionada: {materiaobj.nombre} - ({materiaobj.codigo})")
+        print(f"Secciones actuales: {materiaobj.nrosecciones}")
         nuevaseccion=validarentrada("Ingrese la nueva cantidad de secciones: ")
+
+        if nuevaseccion == 0:
+          print("¡Advertencia!")
+          print("Si continuas, se fijará el numero de secciones en cero")
+          confirmacion=input("¿Deseas continuar?(si/no): ")
+
+          if confirmacion == "no":
+            print("Se ha cancelado la acción")
+            continue
         materiaobj.modificar(nuevaseccion)
-        print("Cantidad de secciones actualizada exitosamente")
+        print("Se ha actualizado la cantidad de secciones")
+
       else:
-        print("No se encuentra alguna materia con ese codigo")
+        print("No hay alguna materia registrada con ese codigo")
     
     elif option==6:
       print("Volviendo al menu de modulos")
