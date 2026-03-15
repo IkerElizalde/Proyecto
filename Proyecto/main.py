@@ -84,6 +84,24 @@ def menuprofesores(sistema):
       ci=input("Ingrese la cedula del profesor: ")
       profe=sistema.buscarprofesor(ci)
       if profe is not None:
+        materiasenpeligro=[]
+        for materia_codigo in profe.materias:
+          otrosprofesoresdisponibles=0
+          for p in sistema.profesores:
+            if p != profe and materia_codigo in p.materias:
+              otrosprofesoresdisponibles +=1
+            
+          if otrosprofesoresdisponibles == 0:
+            materiasenpeligro.append(materia_codigo)
+        
+        if len(materiasenpeligro) > 0:
+          print("¡Advertencia!")
+          print(f"Al eliminar a este profesor, las siguientes materias quedarán sin nadie que las dicte: {materiasenpeligro} ")
+          confirmacion=input("¿Deseas continuar con la acción? (si/no): ")
+          if confirmacion == "no":
+            print("Se ha cancelado la acción")
+            continue
+
         sistema.profesores.remove(profe)
         print(f"El profesor, {profe.nombre}, ha sido eliminado")
       else:
