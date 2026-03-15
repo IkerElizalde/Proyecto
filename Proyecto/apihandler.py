@@ -6,7 +6,7 @@ class APIHandler:
     @staticmethod
     def descargardatos():
         urlprofesores = APIHandler.url + "/profesores.json"
-        urlmaterias = APIHandler.url + "/materias.json"
+        urlmaterias = APIHandler.url + "/materias2526-2.json"
 
         try:
             resprofesores = requests.get(urlprofesores)
