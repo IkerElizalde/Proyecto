@@ -66,6 +66,7 @@ def menuprofesores(sistema):
       else: 
         print("No se encontró ningún profesor con esa cedula registrada")
 
+
     elif option==3:
       print("\n---------Agregar Profesor---------")
       ci=input("Ingrese la cedula del profesor: ")
@@ -79,6 +80,7 @@ def menuprofesores(sistema):
         sistema.profesores.append(nuevoprofesor)
         print(f"El profesor, {nombre}, ha sido agregado satisfactoriamente")
     
+
     elif option==4:
       print("\n---------Eliminar Profesor---------")
       ci=input("Ingrese la cedula del profesor: ")
@@ -107,6 +109,7 @@ def menuprofesores(sistema):
       else:
         print("No hay profesor con esta cedula registrada")
 
+
     elif option==5:
       print("\n---------Modificar Materias de Profesor---------")
       ci=input("Ingrese la cedula del profesor: ")
@@ -132,6 +135,7 @@ def menuprofesores(sistema):
       else:
         print("No hay registro de la cedula ingresada")
     
+
     elif option==6:
       print("Regresando al menu de modulos")
       break
@@ -159,6 +163,7 @@ def menumaterias(sistema):
       else:
         for m in sistema.materias:
           print(m)
+
     elif option == 2:
       print("\n-----Materia especifica-----")  
       codigo=input("Ingrese el código de la materia a buscar: ")
@@ -192,16 +197,39 @@ def menumaterias(sistema):
         nuevamateria=Materia(codigo,nombre,secciones)
         sistema.materias.append(nuevamateria)
 
+
     elif option==4:
       print("---------Eliminar Materias---------")
       codigo=input("Ingrese el codigo de la materia: ")
       materiaobj=sistema.buscarmateriacodigo(codigo)
+
       if materiaobj is not None:
+        profesores_desempleados = []
+        for p in sistema.profesores:
+          if codigo in p.materias and len(p.materias)==1:
+            profesores_desempleados.append(p.nombre)
+
+        if len(profesores_desempleados) > 0:
+          print("¡Advertencia!")
+          print(f"Al eliminar esta materia, los siguientes profesores se quedarán sin materias que dictar: {profesores_desempleados}")
+          confirmacion=input("¿Deseas continuar con la acción? (si/no): ")
+
+          if confirmacion == "no":
+            print("Se ha cancelado la acción")
+            continue
+
         sistema.materias.remove(materiaobj)
-        print(f"La materia: {materiaobj} ha sido eliminada")
+
+        for p in sistema.profesores:
+          if codigo in p.materias:
+            p.eliminarmateria(codigo)
+
+        print(f"La materia {materiaobj.nombre} ha sido eliminada")
+
       else:
-        print("No hay registro de esa materia")
-    
+        print("No hay alguna materia registrada con ese codigo")
+
+
     elif option==5:
       print("\n---------Modificar Seccion de Materias---------")
       codigo=input("Ingrese el codigo de la materia: ")
