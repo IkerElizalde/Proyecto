@@ -179,10 +179,10 @@ def menumaterias(sistema):
           if mater.codigo in p.materias:
             profescapacitados.append(p.nombre)
           
-          if profescapacitados:
-            print(f"A continuación, los profesores capacitados: {profescapacitados}")
-          else:
-            print("No hay profesores capacitados asignados aquí")
+        if profescapacitados:
+          print(f"A continuación, los profesores capacitados: {profescapacitados}")
+        else:
+          print("No hay profesores capacitados asignados aquí")
       else:
         print("No se encontró ninguna materia con ese código")
     
@@ -269,8 +269,25 @@ def menumodulos(sistema):
       menuprofesores(sistema)
     elif option==2:
       menumaterias(sistema)
+
     elif option==3:
-      print("Horarios")
+      print("\n----------------------------------")     
+      print("\n---------Generar horarios---------")
+      print("\n----------------------------------")  
+
+      if len(sistema.materias)== 0 or len(sistema.profesores)== 0:
+        print("Error, debes cargar materias y profesores antes de generar el horario")
+        continue
+
+      salonesdisp=validarentrada("Ingrese la cantidad de salones disponibles en la universidad: ")
+      if salonesdisp <= 0:
+        print("Error. Número sin sentido")
+        continue
+
+      print("Generando horario")
+
+      #aqui debe ir la funcion principal
+
     elif option==4:
       print("Modificar Horarios")
     elif option==5:
