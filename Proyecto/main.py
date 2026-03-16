@@ -1,6 +1,8 @@
 from clasehorarios import SistemaHorarios
 from clasesprofmat import Profesor,Materia
 
+#---------------------------------------------------------------------------------------------->
+
 def menuprincipal():
   print("-------------------------")
   print("---Sistema de Horarios---")
@@ -10,6 +12,8 @@ def menuprincipal():
   print("3. Cargar un horario en CSV")
   print("4. Salir del programa")
 
+#---------------------------------------------------------------------------------------------->
+
 def validarentrada(entrada):
   while True:
     val=input(entrada)
@@ -17,6 +21,8 @@ def validarentrada(entrada):
       return int(val)
     else:
       print("Entrada invalida. Por favor, ingrese un numero.")
+
+#---------------------------------------------------------------------------------------------->
 
 def modulos():
   print("-------------------------")
@@ -28,7 +34,7 @@ def modulos():
   print("4. Modificacion de Horarios")
   print("5. Volver al menu principal")
 
-
+#---------------------------------------------------------------------------------------------->
 
 def menuprofesores(sistema):
   while True:
@@ -142,6 +148,8 @@ def menuprofesores(sistema):
     
     else:
       print("Entrada invalida, se debe ingresar un numero del 1 al 6")
+
+#---------------------------------------------------------------------------------------------->
 
 def menumaterias(sistema):
   while True:
@@ -260,6 +268,7 @@ def menumaterias(sistema):
     else:
       print("Entrada debe ser un numero del 1 al 6")
 
+#---------------------------------------------------------------------------------------------->
 
 def menumodulos(sistema):
   while True:
@@ -270,19 +279,23 @@ def menumodulos(sistema):
     elif option==2:
       menumaterias(sistema)
 
+
     elif option==3:
-      print("\n----------------------------------")     
-      print("\n---------Generar horarios---------")
-      print("\n----------------------------------")  
+      print("\n----------------------------------")    
+      print("---------Generar horarios---------")
+      print("----------------------------------")  
+
 
       if len(sistema.materias)== 0 or len(sistema.profesores)== 0:
         print("Error, debes cargar materias y profesores antes de generar el horario")
         continue
 
+
       salonesdisp=validarentrada("Ingrese la cantidad de salones disponibles en la universidad: ")
       if salonesdisp <= 0:
         print("Error. Número sin sentido")
         continue
+
 
       sistema.generarhorario(salonesdisp)
       if sistema.secciones:
@@ -293,17 +306,17 @@ def menumodulos(sistema):
             m=sistema.buscarmateriacodigo(s.codigo)
             p=sistema.buscarprofesor(s.cedulaprof)
             print(f"{s.horario} - {m.nombre} | Profesor: {p.nombre} | Salon: {s.salon}")
-          
-
-      #aqui debe ir la funcion principal
-
+         
     elif option==4:
-      print("Modificar Horarios")
+      print("\n---------Modificar Horarios---------")
+      modificarhorarios(sistema)
+     
     elif option==5:
       print("Volviendo al menu principal")
-      break     
+      break    
     else:
       print("Entrada invalida")
+
 #---------------------------------------------------------------------------------------------->
 
 def modificarhorarios(sistema):
@@ -509,21 +522,22 @@ def main():
       sistema.materias=[]
       sistema.secciones=[]
       menumodulos(sistema)
-    
+   
     elif option==2:
       print("GitHub")
       if sistema.cargardatosapi():
         menumodulos(sistema)
 
+
     elif option==3:
       print("CSV")
-#se debe pasar a generar el horario
+      # Se debe pasar a cargar el horario
     elif option==4:
       print("Saliendo")
       break
-  #para salir
     else:
       print("Entrada invalida")
 
 
 main()
+
