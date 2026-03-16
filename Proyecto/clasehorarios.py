@@ -190,7 +190,7 @@ class SistemaHorarios:
                 reader= csv.DictReader(f)
                 self.secciones = []
                     
-                    #Para reiniciar/resetear los contadores:
+                #Para reiniciar/resetear los contadores:
 
                 for b in self.bloquesdisp:
                         b.salonesocupados = 0
@@ -203,7 +203,7 @@ class SistemaHorarios:
                     codbloque=row["Bloque_Codigo"]
                     salon=int(row["Salon"])
 
-                        #Para ubicar el objeto del bloque 
+                    #Para ubicar el objeto del bloque 
                     bloque_obj=None
                     for b in self.bloquesdisp:
                         if b.codigo == codbloque:
