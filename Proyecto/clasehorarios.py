@@ -62,24 +62,25 @@ class SistemaHorarios:
 
         if datosprofes is not None and datosmaterias is not None:
             for p in datosprofes:
+                # Combinamos Nombre y Apellido para no perder info
+                nombre_completo = f"{p['Nombre']} {p['Apellido']}"
                 nuevoprofe = Profesor(
-                    p['nombre'], 
-                    p['cedula'], 
-                    p['correo'], 
-                    p['materiasper'], 
-                    p['materias']
+                    nombre_completo, 
+                    p['Cedula'], 
+                    p['Email'], 
+                    p['Max Carga'], 
+                    p['Materias']
                 )
                 self.profesores.append(nuevoprofe)
 
             for m in datosmaterias:
                 nuevamat = Materia(
-                    m['codigo'], 
-                    m['nombre'], 
-                    m['secciones']
+                    m['Código'], 
+                    m['Nombre'], 
+                    m['Secciones'] 
                 )
                 self.materias.append(nuevamat)
             
-            print(f"Se cargaron {len(self.profesores)} profesor/es y {len(self.materias)} materia/s.")
             return True
         else:
             print("Error: No se pudieron obtener los datos de la API.")
