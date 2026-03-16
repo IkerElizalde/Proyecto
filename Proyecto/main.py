@@ -524,7 +524,7 @@ def main():
       menumodulos(sistema)
    
     elif option==2:
-      print("GitHub")
+      print("Cargando los datos del GitHub")
       if sistema.cargardatosapi():
         menumodulos(sistema)
 
