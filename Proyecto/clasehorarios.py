@@ -133,7 +133,7 @@ class SistemaHorarios:
                                         libre=False
                                         break
                                 if libre:
-                                    nuevasec=Seccion(materia.codigo, p.cedula, bloque, salon=salonesocupados+1)
+                                    nuevasec=Seccion(materia.codigo, p.cedula, bloque, salon=bloque.salonesocupados+1)
                                     self.secciones.append(nuevasec)
                                     bloque.salonesocupados+=1
                                     p.seccionesasignadas+=1
