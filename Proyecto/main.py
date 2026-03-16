@@ -325,7 +325,7 @@ def modificarhorarios(sistema):
     return
 
 
-  print("\n--- 1. Seleccionar Materia ---")
+  print("\n--- Seleccionar Materia ---")
  
   codinsecs = []
   for s in sistema.secciones:
@@ -349,7 +349,7 @@ def modificarhorarios(sistema):
   objmateria = sistema.buscarmateriacodigo(selectcode)
 
 
-  print(f"\n--- 2. Seleccionar Sección de {objmateria.nombre} ---")
+  print(f"\n--- Seleccionar Sección de {objmateria.nombre} ---")
 
 
   materiaseccs = []
@@ -375,7 +375,7 @@ def modificarhorarios(sistema):
   bloqueactual = secselect.horario
 
 
-  print("\n--- 3. Opciones de modificación ---")
+  print("\n--- Opciones de modificación ---")
   print("1. Cambiar el profesor de esta sección")
   print("2. Cambiar el horario de esta sección")
   funmod = validarentrada("Seleccione una opción (1 o 2): ")
