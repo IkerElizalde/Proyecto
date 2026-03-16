@@ -112,7 +112,7 @@ class SistemaHorarios:
             if int(materia.nrosecciones)==0:
                 continue
             for numseccion in range(1,int(materia.nrosecciones)+1):
-                asignar=False
+                asignado=False
                 for p in self.profesores:
                     if materia.codigo in p.materias and p.seccionesasignadas<p.materiaspermitidas:
                         for bloque in self.bloquesdisp:
