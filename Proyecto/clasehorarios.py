@@ -101,6 +101,7 @@ class SistemaHorarios:
         return None
 
     def generarhorario(self, salonesdisp):
+        self.limitesalones = salonesdisp
         for p in self.profesores:
             p.seccionesasignadas = 0
         for b in self.bloquesdisp:
