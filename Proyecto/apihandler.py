@@ -24,7 +24,7 @@ class APIHandler:
                 if reply.status_code==200:
                     materiasdelarchivo=reply.json()
                     for m in materiasdelarchivo:
-                        codigoact=m["codigo"]
+                        codigoact=m["Código"]
                         if codigoact not in codigosvistos:
                             datosmaterias.append(m)
                             codigosvistos.append(codigoact)
