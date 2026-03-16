@@ -37,13 +37,6 @@ class APIHandler:
             print("\n Hubo un problema de conexion o lectura de datos")
             print(error)
             return None, None
-        
-
-            respmaterias = requests.get(urlmaterias)
-            respmaterias.raise_for_status()
-            datosmaterias = respmaterias.json()
-
-            return datosprofesores, datosmaterias
 
         except Exception as error:
             print("Hubo un problema al descargar los datos de GitHub:")
