@@ -384,6 +384,39 @@ def modificarhorarios(sistema):
     funprof = validarentrada("Seleccione el número del nuevo profesor: ")
     if funprof >= 1 and funprof <= len (profesoresdisp):
       nuevoprof = profesoresdisp[funprof-1]
+
+
+      secselect.cedulaprof = nuevoprof.cedula
+      profactual.seccionesasignadas -= 1
+      nuevoprof.seccionesasignadas += 1
+
+      print(f"\nÉxito! Profesor cambiado a {nuevo_prof.nombre}.")
+  else:
+    print("Opción inválida")
+elif funmod == 2:
+  print ("\nHorarios con salones disponibles: ")
+  limitesalones = sistema.salonesdisp
+  bloquesdisp = []
+
+  for b un sustema.bloquesdisp:
+    if b.salonesocupados < limitesalones and b.codigo != bloqueactual.codigo:
+      bloquesdisp.append(b)
+
+  if len(bloquesdisp) == 0:
+    print("No hay otros horarios disponibles.")
+
+  else:
+    for i in range(len(bloquesdisp)):
+      bdisp = bloquesdisp[i]
+      print(f"{i+1{bdisp} (Ocupación: {bdisp.salonesocupados}/{limitesalones}))
+
+    funbloque = validarentrada(Seleccione el nñumero del nuevo horario: ")
+      if funbloque >= 1 an funbloque <= len(bloquesdisp)
+        nuevobloque = bloquesdisp[funbloque-1]
+
+        print(f"\nProfesores disponibles para el nuevo horario: ")
+        profdispbloque = []
+
       
 
 
