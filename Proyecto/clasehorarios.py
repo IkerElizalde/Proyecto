@@ -1,3 +1,4 @@
+import csv
 from apihandler import APIHandler
 from clasesprofmat import *
 
@@ -167,7 +168,69 @@ class SistemaHorarios:
                 print(f"-{mat}: {cant} seccion(es)")
             
                             
-                
+    def guardarhorario_csv(self,nombrearchivo):
+        try:
+            with open(nombrearchivo,mode='w',newline='',encoding='utf-8') as f:
+                writer = csv.writer(f)
+                #Para los encabezados:
+                writer.writerow(["Materia","Cedula_Profesor","Bloque_Codigo","Salon"])
+
+                #Secciones generadas:
+                for s in self.secciones:
+                    writer.writerow([s.codigo],[s.cedulaprof],[s.horario.codigo],[s.salon])
+
+            print(f"\n Horario guardado en {nombrearchivo}")
+
+        except Exception as er:
+            print(f"Se ha producido un error al guardar el archivo: {er}")
+
+        def cargarhorario_csv(self,nombrearchivo):
+            try:
+                with open(nombrearchivo,mode='r',encoding='utf-8') as f:
+                    reader= csv.DictReader(f)
+                    self.secciones = []
+                    
+                    #Para reiniciar/resetear los contadores:
+
+                    for b in self.bloquesdisp:
+                        b.salonesocupados = 0
+                    for p in self.profesores:
+                        p.seccionesasignadas = 0
+        
+                    for row in reader:
+                        codmat = row["Materia"]
+                        cedulprof=int(row["Cedula_Profesor"])
+                        codbloque=row["Bloque_Codigo"]
+                        salon=int(row["Salon"])
+
+                        #Para ubicar el objeto del bloque 
+                        bloque_obj=None
+                        for b in self.bloquesdisp:
+                            if b.codigo == codbloque:
+                                bloque_obj = b
+                                break
+                        
+                        #Si sí existe, reconstruimos la sec
+                        if bloque_obj is not None:
+                            nueva_sec=Seccion(codmat,cedulprof,bloque_obj,salon)
+                            self.secciones.append(nueva_sec)
+                            bloque_obj.salonesocupados += 1
+
+                            #Actualizacion secciones asignadas profe
+                            prof = self.buscarprofesor(cedulprof)
+                            if prof is not None:
+                                prof.seccionesasignadas += 1
+
+                print(f"\n Horario cargado desde: '{nombrearchivo}'")
+                return True 
+            
+
+            except FileNotFoundError:
+                print(f"\n Error: el archivo '{nombrearchivo}' no existe")
+                return False
+            except Exception as er:
+                print(f"\n Error al cargar el archivo: {er}")
+                return False
 
 
     

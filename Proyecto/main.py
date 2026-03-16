@@ -359,7 +359,7 @@ def menuconsultashorario(sistema):
       else:
         print("Bloque invalido")
     elif op==4:
-      modificar_horarios(sistema)
+      modificarhorarios(sistema)
     elif op==5:
       print("Volviendo al menu principal")
       break
@@ -577,13 +577,13 @@ def main():
       if sistema.cargardatosapi():
         menumodulos(sistema)
 
-
     elif option==3:
       print("CSV")
       # Se debe pasar a cargar el horario
     elif option==4:
       print("Saliendo")
       break
+    
     else:
       print("Entrada invalida")
 
