@@ -177,7 +177,7 @@ class SistemaHorarios:
 
                 #Secciones generadas:
                 for s in self.secciones:
-                    writer.writerow([s.codigo],[s.cedulaprof],[s.horario.codigo],[s.salon])
+                    writer.writerow([s.codigo,s.cedulaprof,s.horario.codigo,s.salon])
 
             print(f"\n Horario guardado en {nombrearchivo}")
 

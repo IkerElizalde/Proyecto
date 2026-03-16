@@ -298,6 +298,14 @@ def menumodulos(sistema):
 
 
       sistema.generarhorario(salonesdisp)
+
+      print("¿Deseas descargar este horario generado en un archivo CSV?")
+      guardar = input("Ingresa 'si' para guardar, o 'no' para continuar")
+      if guardar == 'si':
+          nombre_csv = input("Guardar archivo como (.csv): ")
+          sistema.guardarhorario_csv(nombre_csv)
+
+
       if sistema.secciones:
         menuconsultashorario(sistema)
          
