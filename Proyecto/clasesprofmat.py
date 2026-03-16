@@ -9,7 +9,7 @@ class Profesor:
             self.materias = materias
         else:
             self.materias = []
-        self.secciones_asignadas = 0 
+        self.seccionesasignadas = 0 
 
     def agregarmateria(self, codigo):
         if codigo not in self.materias:
