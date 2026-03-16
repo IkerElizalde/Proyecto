@@ -360,7 +360,10 @@ def menuconsultashorario(sistema):
   elif op==4:
     modificar_horarios(sistema)
   elif op==5:
+    print("Volviendo al menu principal")
     break
+  else:
+    print("Opcion invalida")
 
 #---------------------------------------------------------------------------------------------->
 
