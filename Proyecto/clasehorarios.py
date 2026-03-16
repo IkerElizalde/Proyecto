@@ -98,7 +98,7 @@ class SistemaHorarios:
                 return m
         return None
 
-    def generarhorario(self, salonesdisp)
+    def generarhorario(self, salonesdisp):
         self.secciones=[]
         for b in self.bloquesdisp:
             b.salonesocupados=0
