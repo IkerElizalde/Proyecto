@@ -299,8 +299,8 @@ def menumodulos(sistema):
 
       sistema.generarhorario(salonesdisp)
 
-      print("¿Deseas descargar este horario generado en un archivo CSV?")
-      guardar = input("Ingresa 'si' para guardar, o 'no' para continuar")
+      print("¿Deseas descargar este horario generado en un archivo CSV? ")
+      guardar = input("Ingresa 'si' para guardar, o 'no' para continuar: ")
       if guardar == 'si':
           nombre_csv = input("Guardar archivo como (.csv): ")
           sistema.guardarhorario_csv(nombre_csv)
@@ -362,8 +362,9 @@ def menuconsultashorario(sistema):
         bloquesel=sistema.bloquesdisp[indice]
         print(f"\nOcupacion para {bloquesel}:")
         for s in sistema.secciones:
-          m=sistema.buscarmateriacodigo(s.codigo)
-          print(f"-Salon {s.salon}: {m.nombre}")
+          if s.horario.codigo == bloquesel.codigo:
+            m=sistema.buscarmateriacodigo(s.codigo)
+            print(f"-Salon {s.salon}: {m.nombre}")
       else:
         print("Bloque invalido")
     elif op==4:
@@ -581,7 +582,7 @@ def main():
       menumodulos(sistema)
    
     elif option==2:
-      print("Cargando los datos del GitHub")
+      print("\n------ Cargando los datos del GitHub...------")
       if sistema.cargardatosapi():
         menumodulos(sistema)
 
@@ -589,7 +590,7 @@ def main():
       print("\n------ Cargar Horario desde csv ------")
      
       if not sistema.profesores or not sistema.materias:
-        print("Se ha iniciado la descarga de los datos base de la API necesarios para eñ sistema")
+        print("Se ha iniciado la descarga de los datos base de la API necesarios para el sistema")
         sistema.cargardatosapi()
 
       nombrecvs = input("Ingrese el nombre de su archivo(.csv): ")
