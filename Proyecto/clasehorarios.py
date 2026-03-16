@@ -107,24 +107,33 @@ class SistemaHorarios:
             p.seccionesasignadas=0
 
         seccionescreadas=0
-        seccionesfallidas=0
+        fallasprofesor={}
+        fallassalon={}
 
         for materia in self.materias:
             if int(materia.nrosecciones)==0:
                 continue
             for numseccion in range(1,int(materia.nrosecciones)+1):
                 asignado=False
+                profesdisp=[]
                 for p in self.profesores:
                     if materia.codigo in p.materias and p.seccionesasignadas<p.materiaspermitidas:
+                        profesdisp.append(p)
+                    if not profesdisp:
+                        if materia.nombre in fallasprofesor:
+                            fallasprofesor[materia.nombre]+=1
+                        else:
+                            fallasprofesor[materia.nombre]=1
+                    for p in profesdisp:
                         for bloque in self.bloquesdisp:
                             if bloque.salonesocupados<salonesdisp:
                                 libre=True
                                 for s in self.secciones:
-                                    if s.cedulaprof==p.cedula and s.horario.codigo==bloque.codigo:
+                                    if s.cedulaprof==p and s.horario.codigo==bloque.codigo:
                                         libre=False
                                         break
                                 if libre:
-                                    nuevasec=Seccion(materia.codigo, p.cedula, bloque, salon=bloque.salonesocupados+1)
+                                    nuevasec=Seccion(materia.codigo, p.cedula, bloque, salon=salonesocupados+1)
                                     self.secciones.append(nuevasec)
                                     bloque.salonesocupados+=1
                                     p.seccionesasignadas+=1
@@ -134,12 +143,31 @@ class SistemaHorarios:
                             if asignado:
                                 break
                         if not asignado:
-                            print(f"No se puede asignar {materia.nombre} (Seccion {numseccion})")
-                            seccionesfallidas+=1
-
+                            if materia.nombre in fallasprofesor:
+                               fallasprofesor[materia.nombre]+=1
+                            else:
+                                fallasprofesor[materia.nombre]=1 
         print(f"Secciones creadas: {seccionescreadas}")
-        if seccionesfallidas>0:
-            print(f"Secciones fallidas: {seccionesfallidas}")
+
+        print("\nSecciones cerradas por falta de profesores:")
+        if not fallasprofesor:
+            print("Ninguna")
+        for mat, cant in fallasprofesor.items():
+                print(f"-{mat}: {cant} seccion(es)")
+        print("\nSecciones no asignadas por falta de salones:")
+        if not fallassalon:
+            print("Ninguna")
+        for mat, cant in fallassalon.items():
+            print(f"-{mat}: {cant} seccion(es)")
+        print("Horarios con salones disponibles:")
+        algundisponible=False
+        for b in self.bloquesdisp:
+            disponibles=salonesdisp-b.salonesocupados
+            if disponibles>0:
+                print(f"-{b}: {disponibles} salon(es) libre(s)")
+                algundisponible=True
+        if not algundisponible:
+            print("No quedan salones disponibles en ningun horario")
             
                             
                 
