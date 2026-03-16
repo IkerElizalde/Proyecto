@@ -124,19 +124,20 @@ class SistemaHorarios:
                             fallasprofesor[materia.nombre]+=1
                         else:
                             fallasprofesor[materia.nombre]=1
-                    for p in profesdisp:
+                        continue
+                    for pdisp in profesdisp:
                         for bloque in self.bloquesdisp:
                             if bloque.salonesocupados<salonesdisp:
                                 libre=True
                                 for s in self.secciones:
-                                    if s.cedulaprof==p and s.horario.codigo==bloque.codigo:
+                                    if s.cedulaprof==pdisp.cedula and s.horario.codigo==bloque.codigo:
                                         libre=False
                                         break
                                 if libre:
                                     nuevasec=Seccion(materia.codigo, p.cedula, bloque, salon=bloque.salonesocupados+1)
                                     self.secciones.append(nuevasec)
                                     bloque.salonesocupados+=1
-                                    p.seccionesasignadas+=1
+                                    pdisp.seccionesasignadas+=1
                                     asignado=True
                                     seccionescreadas+=1
                                     break
