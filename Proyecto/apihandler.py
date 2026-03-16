@@ -37,8 +37,3 @@ class APIHandler:
             print("\n Hubo un problema de conexion o lectura de datos")
             print(error)
             return None, None
-
-        except Exception as error:
-            print("Hubo un problema al descargar los datos de GitHub:")
-            print(error)
-            return None, None
