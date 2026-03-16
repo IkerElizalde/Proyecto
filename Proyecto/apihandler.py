@@ -22,12 +22,12 @@ class APIHandler:
                 urlmaterias=APIHandler.url+nombrearchivo
                 reply=requests.get(urlmaterias)
                 if reply.status_code==200:
-                    materiasdelarchivo=respuesta.json()
+                    materiasdelarchivo=reply.json()
                     for m in materiasdelarchivo:
                         codigoact=m["codigo"]
-                        if codigoact not in codigvistos:
+                        if codigoact not in codigosvistos:
                             datosmaterias.append(m)
-                            codigosvistos.append(codigo act)
+                            codigosvistos.append(codigoact)
                 else:
                     print(f"No se pudo acceder a: {nombrearchivo}")
                     return None, None
@@ -37,3 +37,4 @@ class APIHandler:
             print("\n Hubo un problema de conexion o lectura de datos")
             print(error)
             return None, None
+        
