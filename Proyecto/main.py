@@ -314,56 +314,57 @@ def menumodulos(sistema):
 #---------------------------------------------------------------------------------------------->
 
 def menuconsultashorario(sistema):
-  print("\n----------------------------------")    
-  print("---------Generar horarios---------")
-  print("----------------------------------")
-  print("1. Ver el horario de una materia")
-  print("2. Ver el horario de un profesor")
-  print("3. Ver salones asignados a una hora")
-  print("4. Modificar asignacion")
-  print("5. Volver al menu anterior")
-  op=validarentrada("Seleccione: ")
-  if op==1:
-    cod=input("Ingrese el codigo de la materia: ").upper()
-    m=sistema.buscarmateriacodigo(cod)
-    print(f"\nHorario para: {m.nombre}")
-    for s in sistema.secciones:
-      if s.codigo==cod:
-        p=sistema.buscarprofesor(s.cedulaprof)
-        print(f"-{s.horario} | Profe: {p.nombre} | Salon: {s.salon}")
-      else:
-        print("Materia no encontrada")
-  elif op==2:
-    ci=validarentrada("Ingrese la cedula del profesor: ")
-    p=sistema.buscarprofesor(ci)
-    if p:
-      print("\nHorario para: {p.nombre}")
+  while True:
+    print("\n----------------------------------")    
+    print("---------Generar horarios---------")
+    print("----------------------------------")
+    print("1. Ver el horario de una materia")
+    print("2. Ver el horario de un profesor")
+    print("3. Ver salones asignados a una hora")
+    print("4. Modificar asignacion")
+    print("5. Volver al menu anterior")
+    op=validarentrada("Seleccione: ")
+    if op==1:
+      cod=input("Ingrese el codigo de la materia: ").upper()
+      m=sistema.buscarmateriacodigo(cod)
+      print(f"\nHorario para: {m.nombre}")
       for s in sistema.secciones:
-        if s.cedulaprof==ci:
-          m=sistema.buscarmateriacodigo(s.codigo)
-          print(f"-{s.horario} | Materia: {m.nombre} | Salon: {s.salon}")
+        if s.codigo==cod:
+          p=sistema.buscarprofesor(s.cedulaprof)
+          print(f"-{s.horario} | Profe: {p.nombre} | Salon: {s.salon}")
         else:
-          print("Profesor no encontrado")
-  elif op==3:
-    print("\nBloques disponibles:")
-    for i, b in enumerate(sistema.bloquesdisp):
-      print(f"{i+1}. {b}")
-    indice=validarentrada("Seleccione el numero del bloque: ")-1
-    if 0<=indice<len(sistema.bloquesdisp):
-      bloquesel=sistema.bloquesdisp[indice]
-      print(f"\nOcupacion para {bloquesel}:")
-      for s in sistema.secciones:
-        m=sistema.buscarmateriacodigo(s.codigo)
-        print(f"-Salon {s.salon}: {m.nombre}")
+          print("Materia no encontrada")
+    elif op==2:
+      ci=validarentrada("Ingrese la cedula del profesor: ")
+      p=sistema.buscarprofesor(ci)
+      if p:
+        print("\nHorario para: {p.nombre}")
+        for s in sistema.secciones:
+          if s.cedulaprof==ci:
+            m=sistema.buscarmateriacodigo(s.codigo)
+            print(f"-{s.horario} | Materia: {m.nombre} | Salon: {s.salon}")
+          else:
+            print("Profesor no encontrado")
+    elif op==3:
+      print("\nBloques disponibles:")
+      for i, b in enumerate(sistema.bloquesdisp):
+        print(f"{i+1}. {b}")
+      indice=validarentrada("Seleccione el numero del bloque: ")-1
+      if 0<=indice<len(sistema.bloquesdisp):
+        bloquesel=sistema.bloquesdisp[indice]
+        print(f"\nOcupacion para {bloquesel}:")
+        for s in sistema.secciones:
+          m=sistema.buscarmateriacodigo(s.codigo)
+          print(f"-Salon {s.salon}: {m.nombre}")
+      else:
+        print("Bloque invalido")
+    elif op==4:
+      modificar_horarios(sistema)
+    elif op==5:
+      print("Volviendo al menu principal")
+      break
     else:
-      print("Bloque invalido")
-  elif op==4:
-    modificar_horarios(sistema)
-  elif op==5:
-    print("Volviendo al menu principal")
-    break
-  else:
-    print("Opcion invalida")
+      print("Opcion invalida")
 
 #---------------------------------------------------------------------------------------------->
 
