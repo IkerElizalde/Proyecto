@@ -417,6 +417,57 @@ elif funmod == 2:
         print(f"\nProfesores disponibles para el nuevo horario: ")
         profdispbloque = []
 
+        for p in sistema.profesores:
+          if codeselect in p.materias:
+            if p.cedula == profactual.cedula or p.seccionesasignadas < p.materiaspermitidas:
+
+              ocupado = False
+              for s in sistema.secciones:
+                if s.cedulaprof == p.cedula and s.horario.codigo == nuevobloque.codigo
+                  ocupado = True
+                  break 
+
+        if ocupado == False:
+          profdispbloque.append(p)
+
+    if len(profdispbloque) == 0:
+      print("No hay profesores disponibles para este horario. Operación cancelada.")
+    else:
+      for i in range(len(profdispbloque)):
+        pdisp = profdispbloque[i]
+        print(f"{i+1}. {pdisp.nombre} (CI: {pdisp.cedula})")
+
+        funprof2 = validarentrada("Seleccione el profesor que dará la clase: ")
+        if funprof2 >= 1 and funprof2 <= len(profdispbloque):
+          nuevoprof = profdispbloque[funprof2-1]
+
+          bloqueactual.salonesocupados -= 1
+          nuevobloque.salonesocupados += 1
+
+          secselect.horario = nuevobloque
+          secselect.salon = nuevobloque.salonesocupados
+
+          if nuevoprof.cedula != profactual.cedula:
+              secselect.cedulaprof = nuevoprof.cedula
+              profactual.seccionesasignadas -= 1
+              nuevoprof.seccionesasignadas += 1
+
+          print("\n¡Éxito! Horario actualizado correctamente.")
+
+        else:
+          print("Operación inválida.")
+    else: 
+      print("Operación inválida.")
+  else: 
+    print("Operación inválida.")
+else: 
+  print("Operación inválida.")
+
+print("\n------ Horario Resultante ------)
+for s in sistema.secciones:
+    m = sistema.buscarmateriacodigo.(s.codigo)
+    p = sistema.buscarprofesor(s.cedulaprof)
+    print(f"{s.horario} - {m.nombre} | Profesor: {p.nombre} | Salón: {s.salon}")
       
 
 
