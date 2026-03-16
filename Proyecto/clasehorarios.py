@@ -108,15 +108,15 @@ class SistemaHorarios:
         seccionescreadas=0
         seccionesfallidas=0
 
-        for materias in self.materias:
+        for materia in self.materias:
             if int(materia.nrosecciones)==0:
                 continue
-            for numseccion in range(1,int(nrosecciones)+1):
+            for numseccion in range(1,int(materia.nrosecciones)+1):
                 asignar=False
                 for p in self.profesores:
                     if materia.codigo in p.materias and p.seccionesasignadas<p.materiaspermitidas:
                         for bloque in self.bloquesdisp:
-                            if bloque.salonesocupados<salonesdisponibles:
+                            if bloque.salonesocupados<salonesdisp:
                                 libre=True
                                 for s in self.secciones:
                                     if s.cedulaprof==p.cedula and s.horario.codigo==bloque.codigo:
