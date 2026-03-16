@@ -47,7 +47,7 @@ def menuprofesores(sistema):
     print("4. Eliminar un profesor")
     print("5. Modificar materias de un profesor")
     print("6. Volver a menu de modulos")
-    option=validarentrada("Seleccione una opcion (1-6)")
+    option=validarentrada("Seleccione una opcion (1-6): ")
     if option==1:
       print("\n---------Lista de Profesores---------")
       if not sistema.profesores:
