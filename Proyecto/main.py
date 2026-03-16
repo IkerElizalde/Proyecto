@@ -59,7 +59,7 @@ def menuprofesores(sistema):
     
     elif option == 2:
       print("\n-----Profesor en especifico-----")  
-      ci=input("Ingrese la cédula a buscar: ")
+      ci=validarentrada("Ingrese la cédula a buscar: ")
       profe = sistema.buscarprofesor(ci)
       if profe is not None:
         print("\n---Detalles del profesor---")
@@ -75,7 +75,7 @@ def menuprofesores(sistema):
 
     elif option==3:
       print("\n---------Agregar Profesor---------")
-      ci=input("Ingrese la cedula del profesor: ")
+      ci=validarentrada("Ingrese la cedula del profesor: ")
       if sistema.buscarprofesor(ci) is not None:
         print("Ya existe un profesor con esta cedula")
       else:
@@ -89,7 +89,7 @@ def menuprofesores(sistema):
 
     elif option==4:
       print("\n---------Eliminar Profesor---------")
-      ci=input("Ingrese la cedula del profesor: ")
+      ci=validarentrada("Ingrese la cedula del profesor: ")
       profe=sistema.buscarprofesor(ci)
       if profe is not None:
         materiasenpeligro=[]
@@ -118,7 +118,7 @@ def menuprofesores(sistema):
 
     elif option==5:
       print("\n---------Modificar Materias de Profesor---------")
-      ci=input("Ingrese la cedula del profesor: ")
+      ci=validarentrada("Ingrese la cedula del profesor: ")
       profe=sistema.buscarprofesor(ci)
       if profe is not None:
         print(f"El profesor seleccionado es: {profe.nombre}")
