@@ -578,8 +578,17 @@ def main():
         menumodulos(sistema)
 
     elif option==3:
-      print("CSV")
-      # Se debe pasar a cargar el horario
+      print("\n------ Cargar Horario desde csv ------")
+     
+      if not sistema.profesores or not sistema.materias:
+        print("Se ha iniciado la descarga de los datos base de la API necesarios para eñ sistema")
+        sistema.cargardatosapi()
+
+      nombrecvs = input("Ingrese el nombre de su archivo(.csv): ")
+      #Si se carga exitosamente, aparecen los modulos
+      if sistema.cargarhorario_csv(nombrecvs):
+        menumodulos(sistema)
+
     elif option==4:
       print("Saliendo")
       break
